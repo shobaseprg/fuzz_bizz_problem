@@ -25,7 +25,7 @@
               
         let fizz_num = Number(document.getElementById("fizz_form").value);
         let buzz_num = Number(document.getElementById("buzz_form").value);
-        if (fizz_num === "" || buzz_num === "") { // どちらかが空欄の時(1より小さい時)
+        if (fizz_num === 0 || buzz_num === 0) { // どちらかが空欄の時(1より小さい時)
           div.textContent = "1以上の数値を入力してください";
           result.appendChild(div);
         } else {        
