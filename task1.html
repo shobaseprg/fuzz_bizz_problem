@@ -7,14 +7,18 @@
   <body>
     <h1>FizzBuzz問題</h1>
     <div>
+      fizzNum：<input type="text" id="fizz_form" size="21" placeholder="整数値を入力してください">
+    </div>
+    <div>
       buzzNum：<input type="text" id="buzz_form" size="21" placeholder="整数値を入力してください">
     </div>
     <input type="button" id ="execution" value="実行">
     <p>【出力】</p>
     <div id = "list"></div>
     <script>
-      document.getElementById ("execution") .addEventListener ("click", function () {
+      document.getElementById ("execution") .addEventListener ("click", () => {
         const result = document.getElementById ("list") ;
+        const div = document.createElement ('div') ;
         while (result.firstChild) {
           result.removeChild (result.firstChild) ;
         }
@@ -22,43 +26,41 @@
         let fizz_num = Number (document.getElementById ("fizz_form") .value) ;
         let buzz_num = Number (document.getElementById ("buzz_form") .value) ;
         if (fizz_num == "" || buzz_num == "") { // どちらかが空欄の時(1より小さい時)
-          let div = document.createElement ('div') ;
           div.textContent = "1以上の数値を入力してください";
           result.appendChild (div) ;
         } else {        
           if (Number.isInteger (fizz_num) && Number.isInteger (buzz_num) ) {  // 共に整数の時
             let array = [];
-            for (let num = fizz_num; num < 100;　num += fizz_num) {  //fizzを配列化
+            for (let num = fizz_num; num < 100; num += fizz_num) {  //fizzを配列化
               array.push (num);
             }
-            for (let num = buzz_num; num < 100;　num += buzz_num) {  //buzzを配列に追加
+            for (let num = buzz_num; num < 100; num += buzz_num) {  //buzzを配列に追加
               array.push (num) ;
             }
             array.sort (  // ソート
-              function (a,b) {
+                (a,b) => {
                 return a - b;
               }
             ) ;
-            let non_duplication_array = array.filter (function (x, i, self) {  //重複数字を削除
+            let non_duplication_array = array.filter ( (x, i, self) => {  //重複数字を削除
               return self.indexOf (x) === i;
             });
             for (let i = 0; i < non_duplication_array.length; ++i) {
-              if (non_duplication_array[i] % fizz_num == 0 && non_duplication_array[i] % buzz_num == 0) { // 共に倍数の時
+              if (non_duplication_array[i] % fizz_num === 0 && non_duplication_array[i] % buzz_num === 0) { // 共に倍数の時
                 let div = document.createElement ('div') ;
                 div.textContent = "FizzBuzz " + non_duplication_array[i];
                 result.appendChild (div) ;
-              } else if (non_duplication_array[i] % fizz_num == 0) { // fizzに倍数の時
+              } else if (non_duplication_array[i] % fizz_num === 0) { // fizzに倍数の時
                 let div = document.createElement ('div') ;
                 div.textContent = "Fizz " + non_duplication_array[i];
                 result.appendChild (div) ;
-              } else if (non_duplication_array[i] % buzz_num == 0) { // buzzに倍数の時
+              } else if (non_duplication_array[i] % buzz_num === 0) { // buzzに倍数の時
                 let div = document.createElement ('div') ;
                 div.textContent = "Buzz " + non_duplication_array[i];
                 result.appendChild (div) ;
               } ;
             } ;
           } else {// どちらかが整数以外の時
-            let div = document.createElement ('div') ;
             div.textContent = "整数値を入力してください";
             result.appendChild (div) ;
           } ;
