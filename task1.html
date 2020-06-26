@@ -28,35 +28,20 @@
         if (fizz_num === 0 || buzz_num === 0) { // どちらかが空欄の時(1より小さい時)
           div.textContent = "1以上の数値を入力してください";
           result.appendChild(div);
-        } else {        
+        } else {  
           if (Number.isInteger(fizz_num) && Number.isInteger(buzz_num)) {  // 共に整数の時
-            let array = [];
-            for (let num = fizz_num; num < 100; num += fizz_num) {  //fizzを配列化
-              array.push(num);
-            }
-            for (let num = buzz_num; num < 100; num += buzz_num) {  //buzzを配列に追加
-              array.push(num);
-            }
-            array.sort(  // ソート
-              (a, b) => {
-                return a - b;
-              }
-            );
-            let non_duplication_array = array.filter((x, i, self) => {  //重複数字を削除
-              return self.indexOf(x) === i;
-            });
-            for (let i = 0; i < non_duplication_array.length; ++i) {
-              if (non_duplication_array[i] % fizz_num === 0 && non_duplication_array[i] % buzz_num === 0) { // 共に倍数の時
+            for (let i = 1; i < 100; ++i) {
+              if (i % fizz_num === 0 && i % buzz_num === 0) { // 共に倍数の時
                 let div = document.createElement('div');
-                div.textContent = "FizzBuzz " + non_duplication_array[i];
+                div.textContent = "FizzBuzz " + i;
                 result.appendChild(div);
-              } else if (non_duplication_array[i] % fizz_num === 0) { // fizzに倍数の時
+              } else if (i % fizz_num === 0) { // fizzに倍数の時
                 let div = document.createElement('div');
-                div.textContent = "Fizz " + non_duplication_array[i];
+                div.textContent = "Fizz " + i;
                 result.appendChild(div);
-              } else if (non_duplication_array[i] % buzz_num === 0) { // buzzに倍数の時
+              } else if (i % buzz_num === 0) { // buzzに倍数の時
                 let div = document.createElement('div');
-                div.textContent = "Buzz " + non_duplication_array[i];
+                div.textContent = "Buzz " + i;
                 result.appendChild(div);
               }
             }
